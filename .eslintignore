@@ -3,3 +3,4 @@ coverage
 doc
 webpack.*.js
 validation.test.js
+widget.js

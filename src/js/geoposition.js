@@ -23,8 +23,9 @@ export default class Geoposition {
     this.geoposition = geoposition;
     const spanEl = document.createElement('span');
     spanEl.className = 'message';
-    // eslint-disable-next-line global-require
+    /* eslint-disable global-require */
     const uuid = require('uuid');
+    /* eslint-disable global-require */
     spanEl.id = uuid.v4();
     spanEl.innerHTML = `
     Мои координаты: [<span data-id="geopos" class="geopos">${this.geoposition}</span>]`;
