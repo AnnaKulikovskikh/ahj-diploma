@@ -2,6 +2,7 @@ import API from './api';
 
 export default class AddImages {
   constructor() {
+    this.url = 'https://server-dip.herokuapp.com';
     this.fileEl = document.querySelector('[data-id=file]'); // input file
     this.form = document.querySelector('[data-id=upload-form]');
     this.overlapEl = document.querySelector('[data-id=overlap]');
@@ -32,12 +33,12 @@ export default class AddImages {
       const formData = new FormData(this.form);
       const xhr = new XMLHttpRequest();
 
-      xhr.open('POST', 'https://ahj-diploma-server.herokuapp.com');
+      xhr.open('POST', this.url);
       // TODO: subscribe to response
 
       xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
-          URL.revokeObjectURL(`https://ahj-diploma-server.herokuapp.com${xhr.response}`);
+          URL.revokeObjectURL(`${this.url}${xhr.response}`);
 
           this.idCount += 1;
 
@@ -88,7 +89,7 @@ export default class AddImages {
 
   // eslint-disable-next-line class-methods-use-this
   loadTasks() {
-    const api = new API('https://ahj-diploma-server/imagesArr');
+    const api = new API(`${this.url}/imagesArr`);
 
     async function a(messageList) {
       const images = await api.load();
@@ -100,7 +101,7 @@ export default class AddImages {
           spanEl.id = data[i].name;
 
           const previewEl = document.createElement('img');
-          previewEl.src = `https://ahj-diploma-server.herokuapp.com/${data[i].name}`;
+          previewEl.src = `${this.url}/${data[i].name}`;
           previewEl.className = 'image';
 
           messageList.appendChild(spanEl);

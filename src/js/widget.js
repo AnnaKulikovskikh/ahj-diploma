@@ -8,6 +8,7 @@ const uuid = require('uuid');
 
 export default class Widget {
   constructor(parent) {
+    this.url = 'https://server-dip.herokuapp.com';
     this.parent = parent;
     this.messageList = document.querySelector('[data-id=messageList]');
     this.clipBtn = document.querySelector('[data-id=clip]');
@@ -147,7 +148,7 @@ export default class Widget {
         this.messageList.scrollTop = this.messageList.scrollHeight;
         messageInput.value = '';
 
-        const api = new API('https://ahj-diploma-server.herokuapp.com/newMessage');
+        const api = new API(`${this.url}/newMessage`);
         this.toServerNewMessage(spanEl.id, spanEl.textContent, api);
       }
     });
@@ -224,7 +225,7 @@ export default class Widget {
           localParent.classList.add('favorite');
 
           // отправляем на сервер
-          const api = new API('https://ahj-diploma-server.herokuapp.com/addFavorite');
+          const api = new API(`${this.url}/addFavorite`);
           this.toServerNewFavorite(localParent.id, localParent.textContent, api);
         } else {
           localParent.setAttribute('messageType', 'regular');
@@ -232,7 +233,7 @@ export default class Widget {
 
           // удаление с сервера
           const idEl = localParent.id;
-          const api = new API('https://ahj-diploma-server.herokuapp.com/dellFavorite');
+          const api = new API(`${this.url}/dellFavorite`);
           this.removeElById(api, idEl);
           // удаление с сервера
         }
@@ -297,12 +298,12 @@ export default class Widget {
 
   // работа с сервером
   loadFavoriteMessages() {
-    const api = new API('https://ahj-diploma-server.herokuapp.com/showFavorite');
+    const api = new API(`${this.url}/showFavorite`);
     this.fromServerFavorite(api);
   }
 
   loadMessages() {
-    const api = new API('https://ahj-diploma-server.herokuapp.com/showMessages');
+    const api = new API(`${this.url}/showMessages`);
     this.fromServerMessages(api);
   }
 

@@ -3,6 +3,8 @@ import API from './api';
 /* eslint-disable max-len */
 export default class Geoposition {
   constructor(parent) {
+    //this.url = 'https://server-dip.herokuapp.com';
+    this.url =  'http://localhost:7075';
     this.positionByUser = null;
     this.positionByGeo = null;
     this.parent = parent;
@@ -33,7 +35,7 @@ export default class Geoposition {
 
     this.parent.scrollTop = this.parent.scrollHeight;
 
-    const api = new API('https://ahj-diploma-server.herokuapp.com/newMessage');
+    const api = new API(`${this.url}/newMessage`);
     this.toServerNewMessage(spanEl.id, spanEl.textContent, api);
   }
 

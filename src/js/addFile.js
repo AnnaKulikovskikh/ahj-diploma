@@ -52,20 +52,22 @@ export default class AddFile {
 
       this.addDownloadListener(spanEl.id);
 
+
       // ПРОБУЕМ ОТПРАВИТЬ НА СЕРВЕР
       const formData = new FormData(this.form);
       const xhr = new XMLHttpRequest();
 
-      xhr.open('POST', 'https://ajh-diploma.herokuapp.com'); // 'http://localhost:7075');
+      xhr.open('POST', 'https://server-dip.herokuapp.com'); // 'http://localhost:7075');
 
       xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
-          URL.revokeObjectURL(`https://ajh-diploma.herokuapp.com${xhr.response}`);
+          URL.revokeObjectURL(`https://server-dip.herokuapp.com${xhr.response}`);
         }
       });
 
       xhr.send(formData);
       // ПРОБУЕМ ОТПРАВИТЬ НА СЕРВЕР
+
 
       this.fileEl.value = '';
     }
